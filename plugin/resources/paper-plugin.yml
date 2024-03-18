@@ -1,0 +1,9 @@
+#file: noinspection YAMLSchemaValidation
+name: $name
+version: $version
+main: $main
+api-version: "1.20"
+loader: $loader
+authors: [ TozyDev ]
+website: https://github.com/TozyDev/patek
+description: $description
