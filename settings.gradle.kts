@@ -1,5 +1,5 @@
 import io.github.tozydev.fastmodule.dsl.fastModule
-import io.github.tozydev.fastmodule.dsl.rootModule
+import io.github.tozydev.fastmodule.dsl.module
 import io.github.tozydev.fastmodule.modules.ModuleType
 
 pluginManagement {
@@ -16,5 +16,10 @@ plugins {
 rootProject.name = "patek"
 
 fastModule {
-    rootModule(ModuleType.PAPER_LIB)
+    module(ModuleType.PAPER_LIB, "core") {
+        moduleName = "${rootProject.name}-core"
+    }
+    module(ModuleType.PAPER_PLUGIN, "plugin") {
+        moduleName = "${rootProject.name}-plugin"
+    }
 }
