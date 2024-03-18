@@ -3,6 +3,13 @@ plugins {
     signing
 }
 
+dependencies {
+    api(libs.kotlinx.coroutines.core)
+    api(libs.mccoroutine.bukkit.api)
+
+    implementation(libs.mccoroutine.bukkit.core)
+}
+
 signing {
     val signingKeyId = envOrProp("GPG_KEY_ID", "gpg.keyId").orNull
     val signingKey = envOrProp("GPG_KEY", "gpg.key").orNull
