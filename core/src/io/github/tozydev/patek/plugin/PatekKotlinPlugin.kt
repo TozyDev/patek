@@ -39,7 +39,7 @@ abstract class PatekKotlinPlugin : JavaPlugin(), PatekPlugin {
         mcCoroutine.getCoroutineSession(this).isManipulatedServerHeartBeatEnabled = true
         runBlocking {
             CommandAPI.onEnable()
-            onLoadAsync()
+            onEnableAsync()
         }
         mcCoroutine.getCoroutineSession(this).isManipulatedServerHeartBeatEnabled = false
     }
