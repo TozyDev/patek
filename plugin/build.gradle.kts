@@ -7,6 +7,7 @@ repositories {
             uri("https://maven.nguyenthanhtan.id.vn/releases")
         }
     }
+    maven("https://repo.codemc.org/repository/maven-public/")
 }
 
 dependencies {

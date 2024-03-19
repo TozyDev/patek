@@ -3,6 +3,11 @@ plugins {
     signing
 }
 
+
+repositories {
+    maven("https://repo.codemc.org/repository/maven-public/")
+}
+
 dependencies {
     api(embeddedKotlin("stdlib"))
     api(embeddedKotlin("reflect"))
@@ -10,6 +15,7 @@ dependencies {
     api(libs.mccoroutine.bukkit.api) {
         exclude(module = "kotlin-stdlib-jdk8")
     }
+    api(libs.bundles.commandapi.bukkit)
 
     implementation(libs.mccoroutine.bukkit.core) {
         exclude(module = "kotlin-stdlib-jdk8")
