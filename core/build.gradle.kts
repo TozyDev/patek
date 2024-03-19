@@ -4,10 +4,16 @@ plugins {
 }
 
 dependencies {
+    api(embeddedKotlin("stdlib"))
+    api(embeddedKotlin("reflect"))
     api(libs.kotlinx.coroutines.core)
-    api(libs.mccoroutine.bukkit.api)
+    api(libs.mccoroutine.bukkit.api) {
+        exclude(module = "kotlin-stdlib-jdk8")
+    }
 
-    implementation(libs.mccoroutine.bukkit.core)
+    implementation(libs.mccoroutine.bukkit.core) {
+        exclude(module = "kotlin-stdlib-jdk8")
+    }
 }
 
 signing {
