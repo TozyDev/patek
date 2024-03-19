@@ -1,6 +1,9 @@
 package io.github.tozydev.patek.plugin
 
 import com.github.shynixn.mccoroutine.bukkit.MCCoroutine
+import dev.jorel.commandapi.CommandAPI
+import dev.jorel.commandapi.CommandAPIBukkitConfig
+import dev.jorel.commandapi.CommandAPILogger
 import kotlinx.coroutines.runBlocking
 import org.bukkit.plugin.java.JavaPlugin
 import java.nio.file.Path
@@ -19,8 +22,15 @@ abstract class PatekKotlinPlugin : JavaPlugin(), PatekPlugin {
 
     override suspend fun onDisableAsync() = Unit
 
+    private fun initCommandApi() {
+        CommandAPI.setLogger(CommandAPILogger.fromSlf4jLogger(slF4JLogger))
+        val config = CommandAPIBukkitConfig(this@PatekKotlinPlugin).shouldHookPaperReload(true)
+        CommandAPI.onLoad(config)
+    }
+
     final override fun onLoad() {
         runBlocking {
+            initCommandApi()
             onLoadAsync()
         }
     }
@@ -28,6 +38,7 @@ abstract class PatekKotlinPlugin : JavaPlugin(), PatekPlugin {
     final override fun onEnable() {
         mcCoroutine.getCoroutineSession(this).isManipulatedServerHeartBeatEnabled = true
         runBlocking {
+            CommandAPI.onEnable()
             onLoadAsync()
         }
         mcCoroutine.getCoroutineSession(this).isManipulatedServerHeartBeatEnabled = false
@@ -36,6 +47,8 @@ abstract class PatekKotlinPlugin : JavaPlugin(), PatekPlugin {
     final override fun onDisable() {
         runBlocking {
             onDisableAsync()
+
+            CommandAPI.onDisable()
         }
     }
 
