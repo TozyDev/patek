@@ -86,14 +86,12 @@ private val stackWalker by lazy { StackWalker.getInstance(StackWalker.Option.RET
  * Retrieves the currently working plugin that calls this method.
  *
  * This method use [StackWalker] to retrieve the first caller class that it's class loader is a [ConfiguredPluginClassLoader].
- *
- * @throws ClassCastException If the current working plugin is not a [PatekKotlinPlugin].
  */
 @Suppress("UnstableApiUsage")
 internal fun retrieveCallingPlugin() = stackWalker
     .walk { stream ->
         stream
-            .takeWhile { it.declaringClass.classLoader is ConfiguredPluginClassLoader }
+            .filter { it.declaringClass.classLoader is ConfiguredPluginClassLoader }
             .findFirst()
             .get()
-    }.let { JavaPlugin.getProvidingPlugin(it.declaringClass) as PatekKotlinPlugin }
+    }.let { JavaPlugin.getProvidingPlugin(it.declaringClass) }
