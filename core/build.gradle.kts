@@ -42,6 +42,7 @@ testing {
         dependencies {
             implementation(libs.mockk)
             implementation(libs.paper.api)
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }
