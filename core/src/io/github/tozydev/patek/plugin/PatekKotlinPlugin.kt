@@ -7,6 +7,7 @@ import dev.jorel.commandapi.CommandAPILogger
 import kotlinx.coroutines.runBlocking
 import org.bukkit.plugin.java.JavaPlugin
 import java.nio.file.Path
+import kotlin.reflect.KClass
 
 /**
  * Base class for Patek Kotlin plugins.
@@ -61,14 +62,19 @@ abstract class PatekKotlinPlugin : JavaPlugin(), PatekPlugin {
                 throw RuntimeException("Failed to load MCCoroutine implementation. Shade patek-core into your plugin.")
             }
         }
-
-        /**
-         * Retrieves the instance of a specified plugin class.
-         *
-         * @param T The plugin class extending [JavaPlugin].
-         * @see JavaPlugin.getPlugin
-         */
-        @Suppress("unused")
-        inline fun <reified T : JavaPlugin> getPlugin() = getPlugin(T::class.java)
     }
+}
+
+@PublishedApi
+internal val pluginInstances by lazy { mutableMapOf<KClass<*>, PatekKotlinPlugin>() }
+
+/**
+ * Retrieves the instance of a specified plugin class.
+ *
+ * @param T The plugin class extending [JavaPlugin].
+ * @see JavaPlugin.getPlugin
+ */
+@Suppress("unused")
+inline fun <reified T : JavaPlugin> getPlugin() = pluginInstances.getOrPut(T::class) {
+    JavaPlugin.getPlugin(T::class.java) as PatekKotlinPlugin
 }
