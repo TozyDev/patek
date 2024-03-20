@@ -1,4 +1,7 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
+    `java-test-fixtures`
     `maven-publish`
     signing
 }
@@ -19,6 +22,27 @@ dependencies {
 
     implementation(libs.mccoroutine.bukkit.core) {
         exclude(module = "kotlin-stdlib-jdk8")
+    }
+
+    testFixturesImplementation(libs.mockk)
+}
+
+sourceSets {
+    testFixtures {
+        java.setSrcDirs(listOf("testFixtures"))
+        kotlin.setSrcDirs(listOf("testFixtures"))
+        resources.setSrcDirs(listOf("testFixturesResources"))
+    }
+}
+
+testing {
+    val test by suites.getting(JvmTestSuite::class) {
+        useKotlinTest(embeddedKotlinVersion)
+
+        dependencies {
+            implementation(libs.mockk)
+            implementation(libs.paper.api)
+        }
     }
 }
 

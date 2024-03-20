@@ -1,14 +1,19 @@
 [versions]
+paper = "1.20.4-R0.1-SNAPSHOT"
 coroutines-bom = "1.8.1-Beta"
 mccoroutine-bom = "2.15.0"
 commandapi-bom = "9.3.0"
 
 [libraries]
+paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines-bom" }
 mccoroutine-bukkit-api = { module = "com.github.shynixn.mccoroutine:mccoroutine-bukkit-api", version.ref = "mccoroutine-bom" }
 mccoroutine-bukkit-core = { module = "com.github.shynixn.mccoroutine:mccoroutine-bukkit-core", version.ref = "mccoroutine-bom" }
 commandapi-bukkit-shade = { module = "dev.jorel:commandapi-bukkit-shade", version.ref = "commandapi-bom" }
 commandapi-bukkit-kotlin = { module = "dev.jorel:commandapi-bukkit-kotlin", version.ref = "commandapi-bom" }
+
+# Testing
+mockk = { module = "io.mockk:mockk", version = "1.13.10" }
 
 [bundles]
 commandapi-bukkit = ["commandapi-bukkit-shade", "commandapi-bukkit-kotlin"]
