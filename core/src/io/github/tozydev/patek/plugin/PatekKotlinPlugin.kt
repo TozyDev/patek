@@ -4,6 +4,7 @@ import com.github.shynixn.mccoroutine.bukkit.MCCoroutine
 import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
 import dev.jorel.commandapi.CommandAPILogger
+import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader
 import kotlinx.coroutines.runBlocking
 import org.bukkit.plugin.java.JavaPlugin
 import java.nio.file.Path
@@ -80,15 +81,19 @@ inline fun <reified T : PatekKotlinPlugin> getPlugin() = pluginInstances.getOrPu
 }
 
 private val stackWalker by lazy { StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE) }
-private val PATEK_PACKAGE = PatekKotlinPlugin::class.java.packageName.substringBeforeLast('.')
 
 /**
  * Retrieves the currently working plugin that calls this method.
  *
- * This method use [StackWalker] to retrieve the first caller class that is not a part of the _Patek_ library.
+ * This method use [StackWalker] to retrieve the first caller class that it's class loader is a [ConfiguredPluginClassLoader].
  *
  * @throws ClassCastException If the current working plugin is not a [PatekKotlinPlugin].
  */
+@Suppress("UnstableApiUsage")
 internal fun retrieveCallingPlugin() = stackWalker
-    .walk { stream -> stream.dropWhile { it.declaringClass.packageName.startsWith(PATEK_PACKAGE) }.findFirst().get() }
-    .let { JavaPlugin.getProvidingPlugin(it.declaringClass) as PatekKotlinPlugin }
+    .walk { stream ->
+        stream
+            .takeWhile { it.declaringClass.classLoader is ConfiguredPluginClassLoader }
+            .findFirst()
+            .get()
+    }.let { JavaPlugin.getProvidingPlugin(it.declaringClass) as PatekKotlinPlugin }
