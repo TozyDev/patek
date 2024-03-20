@@ -71,10 +71,10 @@ internal val pluginInstances by lazy { mutableMapOf<KClass<*>, PatekKotlinPlugin
 /**
  * Retrieves the instance of a specified plugin class.
  *
- * @param T The plugin class extending [JavaPlugin].
+ * @param T The plugin class extending [PatekKotlinPlugin].
  * @see JavaPlugin.getPlugin
  */
 @Suppress("unused")
-inline fun <reified T : JavaPlugin> getPlugin() = pluginInstances.getOrPut(T::class) {
-    JavaPlugin.getPlugin(T::class.java) as PatekKotlinPlugin
+inline fun <reified T : PatekKotlinPlugin> getPlugin() = pluginInstances.getOrPut(T::class) {
+    JavaPlugin.getPlugin(T::class.java)
 }
