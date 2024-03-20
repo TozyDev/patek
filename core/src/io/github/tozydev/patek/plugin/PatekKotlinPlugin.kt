@@ -78,3 +78,17 @@ internal val pluginInstances by lazy { mutableMapOf<KClass<*>, PatekKotlinPlugin
 inline fun <reified T : PatekKotlinPlugin> getPlugin() = pluginInstances.getOrPut(T::class) {
     JavaPlugin.getPlugin(T::class.java)
 }
+
+private val stackWalker by lazy { StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE) }
+private val PATEK_PACKAGE = PatekKotlinPlugin::class.java.packageName.substringBeforeLast('.')
+
+/**
+ * Retrieves the currently working plugin that calls this method.
+ *
+ * This method use [StackWalker] to retrieve the first caller class that is not a part of the _Patek_ library.
+ *
+ * @throws ClassCastException If the current working plugin is not a [PatekKotlinPlugin].
+ */
+internal fun retrieveCallingPlugin() = stackWalker
+    .walk { stream -> stream.dropWhile { it.declaringClass.packageName.startsWith(PATEK_PACKAGE) }.findFirst().get() }
+    .let { JavaPlugin.getProvidingPlugin(it.declaringClass) as PatekKotlinPlugin }
