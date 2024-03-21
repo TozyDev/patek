@@ -45,6 +45,7 @@ private val stackWalker by lazy { StackWalker.getInstance(StackWalker.Option.RET
  * This method use [StackWalker] to retrieve the first caller class that it's class loader is a [ConfiguredPluginClassLoader].
  */
 @Suppress("UnstableApiUsage")
+@PublishedApi
 internal fun retrieveCallingPlugin() = stackWalker
     .walk { stream ->
         stream
