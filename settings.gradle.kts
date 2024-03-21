@@ -18,6 +18,11 @@ rootProject.name = "patek"
 fastModule {
     module(ModuleType.PAPER_LIB, "core") {
         moduleName = "${rootProject.name}-core"
+        settings {
+            paper {
+                internal = true
+            }
+        }
     }
     module(ModuleType.PAPER_PLUGIN, "plugin") {
         moduleName = "${rootProject.name}-plugin"
