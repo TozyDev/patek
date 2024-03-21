@@ -52,3 +52,20 @@ inline fun <reified E : Event> Listener.register(
  * @see HandlerList.unregisterAll
  */
 fun Listener.unregisterAll() = HandlerList.unregisterAll(this)
+
+/**
+ * Creates a listener and registers it to receive event [E] from the Bukkit plugin manager.
+ *
+ * @param E the event type to listen for
+ * @param plugin the plugin that owns the listener (defaults to the calling plugin)
+ * @param priority the priority of the listener (defaults to [EventPriority.NORMAL])
+ * @param ignoreCancelled specifies if cancelled events should be ignored (defaults to false)
+ * @param action the callback to execute when the event occurs
+ * @return the registered listener
+ */
+inline fun <reified E : Event> listen(
+    plugin: Plugin = retrieveCallingPlugin(),
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    crossinline action: (E) -> Unit,
+) = EventListener<E> { action(it) }.also { it.register(plugin, priority, ignoreCancelled) }
