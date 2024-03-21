@@ -1,6 +1,9 @@
+@file:Suppress("unused")
+
 package io.github.tozydev.patek.plugin
 
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader
+import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import kotlin.reflect.KClass
 
@@ -13,10 +16,26 @@ internal val pluginInstances by lazy { mutableMapOf<KClass<*>, JavaPlugin>() }
  * @param T The plugin class extending [JavaPlugin].
  * @see JavaPlugin.getPlugin
  */
-@Suppress("unused")
 inline fun <reified T : JavaPlugin> getPlugin() = pluginInstances.getOrPut(T::class) {
     JavaPlugin.getPlugin(T::class.java)
 }
+
+/**
+ * Retrieves the plugin with the specified [name], if it is of the specified type.
+ *
+ * @param T The plugin class extending [JavaPlugin].
+ */
+inline fun <reified T : JavaPlugin> getPluginOrNull(name: String) = Bukkit.getPluginManager().getPlugin(name) as? T
+
+/**
+ * Retrieves the plugin with the specified [name], if it is of the specified type.
+ *
+ * @param T The plugin class extending [JavaPlugin].
+ * @throws IllegalArgumentException if the plugin with the given name is not found.
+ * @throws ClassCastException if the plugin is not of the specified type.
+ */
+inline fun <reified T : JavaPlugin> getPlugin(name: String) =
+    requireNotNull(Bukkit.getPluginManager().getPlugin(name)) { "Plugin $name not found" } as T
 
 private val stackWalker by lazy { StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE) }
 
