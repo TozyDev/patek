@@ -2,8 +2,8 @@
 
 package io.github.tozydev.patek.plugin
 
+import io.github.tozydev.patek.server.PaperServer
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader
-import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import kotlin.reflect.KClass
 
@@ -25,7 +25,7 @@ inline fun <reified T : JavaPlugin> getPlugin() = pluginInstances.getOrPut(T::cl
  *
  * @param T The plugin class extending [JavaPlugin].
  */
-inline fun <reified T : JavaPlugin> getPluginOrNull(name: String) = Bukkit.getPluginManager().getPlugin(name) as? T
+inline fun <reified T : JavaPlugin> getPluginOrNull(name: String) = PaperServer.pluginManager.getPlugin(name) as? T
 
 /**
  * Retrieves the plugin with the specified [name], if it is of the specified type.
@@ -35,7 +35,7 @@ inline fun <reified T : JavaPlugin> getPluginOrNull(name: String) = Bukkit.getPl
  * @throws ClassCastException if the plugin is not of the specified type.
  */
 inline fun <reified T : JavaPlugin> getPlugin(name: String) =
-    requireNotNull(Bukkit.getPluginManager().getPlugin(name)) { "Plugin $name not found" } as T
+    requireNotNull(PaperServer.pluginManager.getPlugin(name)) { "Plugin $name not found" } as T
 
 private val stackWalker by lazy { StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE) }
 
