@@ -7,6 +7,7 @@ plugins {
 dependencies {
     api(embeddedKotlin("stdlib"))
     api(embeddedKotlin("reflect"))
+    api(platform(libs.kotlinx.coroutines.bom))
     api(libs.kotlinx.coroutines.core)
     api(libs.mccoroutine.bukkit.api) {
         exclude(module = "kotlin-stdlib-jdk8")
