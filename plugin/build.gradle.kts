@@ -3,5 +3,5 @@ repositories {
 }
 
 dependencies {
-    paperLib(project(":patek-core"))
+    paperLib(projects.patekCore)
 }

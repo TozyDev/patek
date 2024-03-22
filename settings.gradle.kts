@@ -14,6 +14,10 @@ plugins {
     id("io.github.tozydev.fast-module") version "1.0.0-Final"
 }
 
+dependencyResolutionManagement {
+    enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+}
+
 rootProject.name = "patek"
 
 fastModule {
