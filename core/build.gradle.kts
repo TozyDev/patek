@@ -4,11 +4,6 @@ plugins {
     id("patek.publishing-conventions")
 }
 
-
-repositories {
-    maven("https://repo.codemc.org/repository/maven-public/")
-}
-
 dependencies {
     api(embeddedKotlin("stdlib"))
     api(embeddedKotlin("reflect"))

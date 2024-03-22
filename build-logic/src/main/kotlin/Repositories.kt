@@ -1,5 +1,6 @@
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.RepositoryHandler
+import org.gradle.kotlin.dsl.maven
 
 const val TOZYDEV_REPO = "tozydev"
 const val TOZYDEV_RELEASES_REPO = "https://maven.nguyenthanhtan.id.vn/releases"
@@ -17,4 +18,8 @@ fun RepositoryHandler.tozydev(project: Project) = maven {
         username = project.environmentOrProperty("MAVEN_USERNAME", "maven.username").orNull
         password = project.environmentOrProperty("MAVEN_TOKEN", "maven.token").orNull
     }
+}
+
+fun RepositoryHandler.codeMC() = maven("https://repo.codemc.org/repository/maven-public/") {
+    name = "CodeMC"
 }
