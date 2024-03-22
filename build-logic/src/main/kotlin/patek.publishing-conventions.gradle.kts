@@ -13,3 +13,9 @@ publishing {
         tozydev(project)
     }
 }
+
+plugins.withType<JavaPlugin> {
+    extensions.configure<JavaPluginExtension> {
+        withSourcesJar()
+    }
+}
