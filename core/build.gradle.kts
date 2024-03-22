@@ -39,6 +39,7 @@ publishing {
         artifact(tasks.jar.map { it.outputs.files.singleFile })
         pom {
             name = "Patek Core"
+            description = "A Paper plugin library for Kotlin language"
         }
     }
 }
