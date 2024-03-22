@@ -3,6 +3,7 @@
 package io.github.tozydev.patek.inventory
 
 import com.destroystokyo.paper.profile.ProfileProperty
+import io.github.tozydev.patek.nbt.set
 import io.github.tozydev.patek.text.text
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextDecoration
@@ -122,8 +123,11 @@ class FastItemStackConverter(private val fastStack: FastItemStack) {
 
     private fun ItemStack.applyNbt() {
         setPropIfPresent(FastItemStack::nbt) {
+            if (it.isEmpty()) {
+                return@setPropIfPresent
+            }
             modifyNbt {
-                mergeCompound(it)
+                it.forEach { (key, value) -> this[key] = value }
             }
         }
     }
