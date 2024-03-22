@@ -2,20 +2,18 @@ import org.gradle.api.component.SoftwareComponent
 import org.gradle.api.publish.PublicationContainer
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.register
+import org.gradle.kotlin.dsl.create
 
-fun PublicationContainer.createPublication(
-    component: SoftwareComponent,
-    publicationName: String = "maven",
-) = register<MavenPublication>(publicationName) {
-    from(component)
+private const val GITHUB_REPO = "https://github/TozyDev/patek"
+
+fun MavenPublication.withDefaults() {
     pom {
-        url = "https://github/TozyDev/patek"
+        url = GITHUB_REPO
         inceptionYear = "2024"
         licenses {
             license {
                 name = "MIT"
-                url = "https://github.com/TozyDev/patek/blob/main/LICENSE"
+                url = "$GITHUB_REPO/blob/main/LICENSE"
                 distribution = "repo"
             }
         }
@@ -30,7 +28,14 @@ fun PublicationContainer.createPublication(
         scm {
             connection = "scm:git:git://github.com/TozyDev/patek.git"
             developerConnection = "scm:git:ssh://github.com/TozyDev/patek.git"
-            url = "https://github.com/TozyDev/patek"
+            url = GITHUB_REPO
         }
     }
+}
+
+fun PublicationContainer.createPublication(
+    component: SoftwareComponent,
+    publicationName: String = "maven",
+) = create<MavenPublication>(publicationName) {
+    from(component)
 }
