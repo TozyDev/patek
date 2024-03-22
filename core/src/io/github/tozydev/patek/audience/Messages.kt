@@ -49,8 +49,11 @@ data class ActionBarMessage(val actionBar: String) : Message
  *
  * @see Audience.showTitle
  */
-data class TitleMessage(val title: String? = null, val subtitle: String? = null, val times: Times? = null) : Message {
-
+data class TitleMessage(
+    val title: String? = null,
+    val subtitle: String? = null,
+    val times: Times? = null,
+) : Message {
     /**
      * Represents the duration for the fadeIn, stay, and fadeOut effects of a title message.
      *
@@ -58,7 +61,11 @@ data class TitleMessage(val title: String? = null, val subtitle: String? = null,
      * @property stay The duration the message should stay on screen in milliseconds.
      * @property fadeOut The duration of the fadeOut effect in milliseconds.
      */
-    data class Times(val fadeIn: Duration, val stay: Duration, val fadeOut: Duration)
+    data class Times(
+        val fadeIn: Duration,
+        val stay: Duration,
+        val fadeOut: Duration,
+    )
 }
 
 /**
@@ -96,7 +103,10 @@ data class CompositeMessage(val messages: List<Message> = emptyList()) : Message
  * @param message The message to be sent.
  * @param tagResolvers The array of tag resolvers to be used during deserialization.
  */
-fun Audience.sendMessage(message: Message, vararg tagResolvers: TagResolver) {
+fun Audience.sendMessage(
+    message: Message,
+    vararg tagResolvers: TagResolver,
+) {
     when (message) {
         is TextMessage -> sendMessage(message.text.text(*tagResolvers))
         is ActionBarMessage -> sendActionBar(message.actionBar.text(*tagResolvers))
@@ -106,28 +116,32 @@ fun Audience.sendMessage(message: Message, vararg tagResolvers: TagResolver) {
     }
 }
 
-private fun TitleMessage.toAdventureTitle(vararg tagResolvers: TagResolver) = Title.title(
-    title?.text(*tagResolvers).orEmpty(),
-    subtitle?.text(*tagResolvers).orEmpty(),
-    times?.toAdventureTimes(),
-)
+private fun TitleMessage.toAdventureTitle(vararg tagResolvers: TagResolver) =
+    Title.title(
+        title?.text(*tagResolvers).orEmpty(),
+        subtitle?.text(*tagResolvers).orEmpty(),
+        times?.toAdventureTimes(),
+    )
 
-private fun TitleMessage.Times.toAdventureTimes() = Title.Times.times(
-    fadeIn.toJavaDuration(),
-    stay.toJavaDuration(),
-    fadeOut.toJavaDuration(),
-)
+private fun TitleMessage.Times.toAdventureTimes() =
+    Title.Times.times(
+        fadeIn.toJavaDuration(),
+        stay.toJavaDuration(),
+        fadeOut.toJavaDuration(),
+    )
 
-private fun SoundMessage.toAdventureSound() = Sound.sound().run {
-    val type = try {
-        org.bukkit.Sound.valueOf(sound.uppercase()).key
-    } catch (e: IllegalArgumentException) {
-        val key = NamespacedKey.minecraft(sound)
-        org.bukkit.Sound.entries.firstOrNull { it.key == key }?.key ?: key
+private fun SoundMessage.toAdventureSound() =
+    Sound.sound().run {
+        val type =
+            try {
+                org.bukkit.Sound.valueOf(sound.uppercase()).key
+            } catch (e: IllegalArgumentException) {
+                val key = NamespacedKey.minecraft(sound)
+                org.bukkit.Sound.entries.firstOrNull { it.key == key }?.key ?: key
+            }
+        type(type)
+        source?.let { source(it) }
+        volume?.let { volume(volume) }
+        pitch?.let { pitch(pitch) }
+        build()
     }
-    type(type)
-    source?.let { source(it) }
-    volume?.let { volume(volume) }
-    pitch?.let { pitch(pitch) }
-    build()
-}

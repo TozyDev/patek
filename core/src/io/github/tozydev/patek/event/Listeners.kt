@@ -17,8 +17,7 @@ import org.bukkit.plugin.Plugin
  * @param plugin the plugin to register the listener with (defaults to the calling plugin)
  * @see org.bukkit.plugin.PluginManager.registerEvents
  */
-fun Listener.registerAll(plugin: Plugin = retrieveCallingPlugin()) =
-    Bukkit.getPluginManager().registerEvents(this, plugin)
+fun Listener.registerAll(plugin: Plugin = retrieveCallingPlugin()) = Bukkit.getPluginManager().registerEvents(this, plugin)
 
 /**
  * Registers a listener for a specific event type with custom event execution.

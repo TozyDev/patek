@@ -1,0 +1,6 @@
+root = true
+
+[*.{kt,kts}]
+# noinspection EditorConfigKeyCorrectness
+ktlint_code_style = ktlint_official
+ij_kotlin_packages_to_use_import_on_demand = java.util.*

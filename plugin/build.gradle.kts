@@ -1,7 +1,3 @@
-plugins {
-    id("patek.utils")
-}
-
 repositories {
     tozydev(project)
 }

@@ -12,7 +12,6 @@ import org.bukkit.plugin.Plugin
  * @param E the event type to listen for
  */
 fun interface EventListener<E : Event> : Listener {
-
     /**
      * Executes a callback when the specified event occurs.
      *

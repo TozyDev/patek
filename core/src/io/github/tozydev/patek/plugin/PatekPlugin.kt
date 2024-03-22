@@ -10,7 +10,6 @@ import java.nio.file.Path
  * @see [SuspendingPlugin]
  */
 interface PatekPlugin : Plugin {
-
     /**
      * The directory that the plugin data's files are located in. The directory may not exist.
      */

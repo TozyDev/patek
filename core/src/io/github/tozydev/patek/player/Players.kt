@@ -37,7 +37,6 @@ fun player(name: String) = requireNotNull(playerOrNull(name)) { "Player not with
  */
 fun playerOrNull(id: UUID) = PaperServer.getPlayer(id)
 
-
 /**
  * Gets the player with the given [id].
  *

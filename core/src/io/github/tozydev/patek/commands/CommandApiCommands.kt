@@ -10,4 +10,7 @@ import dev.jorel.commandapi.kotlindsl.commandAPICommand
  *
  * @see commandAPICommand
  */
-fun command(name: String, block: CommandAPICommand.() -> Unit) = commandAPICommand(name, block)
+fun command(
+    name: String,
+    block: CommandAPICommand.() -> Unit,
+) = commandAPICommand(name, block)

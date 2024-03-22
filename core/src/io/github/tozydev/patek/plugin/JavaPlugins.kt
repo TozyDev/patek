@@ -16,9 +16,10 @@ internal val pluginInstances by lazy { mutableMapOf<KClass<*>, JavaPlugin>() }
  * @param T The plugin class extending [JavaPlugin].
  * @see JavaPlugin.getPlugin
  */
-inline fun <reified T : JavaPlugin> getPlugin() = pluginInstances.getOrPut(T::class) {
-    JavaPlugin.getPlugin(T::class.java)
-}
+inline fun <reified T : JavaPlugin> getPlugin() =
+    pluginInstances.getOrPut(T::class) {
+        JavaPlugin.getPlugin(T::class.java)
+    }
 
 /**
  * Retrieves the plugin with the specified [name], if it is of the specified type.
@@ -46,10 +47,9 @@ private val stackWalker by lazy { StackWalker.getInstance(StackWalker.Option.RET
  */
 @Suppress("UnstableApiUsage")
 @PublishedApi
-internal fun retrieveCallingPlugin() = stackWalker
-    .walk { stream ->
-        stream
-            .filter { it.declaringClass.classLoader is ConfiguredPluginClassLoader }
+internal fun retrieveCallingPlugin() =
+    stackWalker.walk { stream ->
+        stream.filter { it.declaringClass.classLoader is ConfiguredPluginClassLoader }
             .findFirst()
             .get()
     }.let { JavaPlugin.getProvidingPlugin(it.declaringClass) }

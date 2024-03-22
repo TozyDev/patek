@@ -16,5 +16,8 @@ commandapi-bukkit-kotlin = { module = "dev.jorel:commandapi-bukkit-kotlin", vers
 # Testing
 mockk = { module = "io.mockk:mockk", version = "1.13.10" }
 
+# Build logic
+ktlint-gradle = { module = "org.jlleitschuh.gradle:ktlint-gradle", version = "12.1.0" }
+
 [bundles]
 commandapi-bukkit = ["commandapi-bukkit-shade", "commandapi-bukkit-kotlin"]
