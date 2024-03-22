@@ -1,7 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    `java-test-fixtures`
     id("patek.publishing-conventions")
 }
 
@@ -21,16 +20,6 @@ dependencies {
 
     implementation(libs.mccoroutine.bukkit.core) {
         exclude(module = "kotlin-stdlib-jdk8")
-    }
-
-    testFixturesImplementation(libs.mockk)
-}
-
-sourceSets {
-    testFixtures {
-        java.setSrcDirs(listOf("testFixtures"))
-        kotlin.setSrcDirs(listOf("testFixtures"))
-        resources.setSrcDirs(listOf("testFixturesResources"))
     }
 }
 

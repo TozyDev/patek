@@ -1,7 +1,7 @@
 package io.github.tozydev.patek.commands
 
 import dev.jorel.commandapi.CommandAPI
-import io.github.tozydev.patek.fixtures.plugin.mockkPlugin
+import io.github.tozydev.patek.plugins.mockkPlugin
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.justRun

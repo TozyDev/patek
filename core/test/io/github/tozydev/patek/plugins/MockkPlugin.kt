@@ -1,4 +1,4 @@
-package io.github.tozydev.patek.fixtures.plugin
+package io.github.tozydev.patek.plugins
 
 import io.github.tozydev.patek.plugin.PatekKotlinPlugin
 import io.mockk.mockkClass
