@@ -1,4 +1,4 @@
-package io.github.tozydev.patek.fixtures.plugin
+package io.github.tozydev.patek.plugins
 
 import io.papermc.paper.plugin.configuration.PluginMeta
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader
