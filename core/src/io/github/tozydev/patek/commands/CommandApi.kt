@@ -3,6 +3,7 @@ package io.github.tozydev.patek.commands
 import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
 import dev.jorel.commandapi.CommandAPILogger
+import io.github.tozydev.patek.nbt.NBTContainer
 import io.github.tozydev.patek.plugin.PatekKotlinPlugin
 
 /**
@@ -23,7 +24,9 @@ internal object CommandApi {
         }
         loaded = true
         CommandAPI.setLogger(CommandAPILogger.fromSlf4jLogger(plugin.slF4JLogger))
-        val config = CommandAPIBukkitConfig(plugin).shouldHookPaperReload(true)
+        val config = CommandAPIBukkitConfig(plugin)
+            .shouldHookPaperReload(true)
+            .initializeNBTAPI(NBTContainer::class.java, ::NBTContainer)
         CommandAPI.onLoad(config)
     }
 
