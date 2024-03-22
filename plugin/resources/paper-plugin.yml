@@ -7,3 +7,4 @@ loader: $loader
 authors: [ TozyDev ]
 website: https://github.com/TozyDev/patek
 description: $description
+prefix: patek
