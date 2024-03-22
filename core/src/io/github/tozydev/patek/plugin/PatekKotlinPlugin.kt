@@ -11,7 +11,6 @@ import java.nio.file.Path
  * This class provides the functionality for a Paper plugin with kotlinx-coroutines support.
  */
 abstract class PatekKotlinPlugin : JavaPlugin(), PatekPlugin {
-
     override val dataDirectory: Path = dataFolder.toPath()
 
     override suspend fun onLoadAsync() = Unit
@@ -44,7 +43,6 @@ abstract class PatekKotlinPlugin : JavaPlugin(), PatekPlugin {
     }
 
     companion object {
-
         internal val mcCoroutine: MCCoroutine by lazy {
             try {
                 Class.forName(MCCoroutine.Driver).getDeclaredConstructor().newInstance() as MCCoroutine

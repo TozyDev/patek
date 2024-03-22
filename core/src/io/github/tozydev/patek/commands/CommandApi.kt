@@ -9,7 +9,6 @@ import io.github.tozydev.patek.plugin.PatekKotlinPlugin
  * Provides wrapper functions for loading and enabling the CommandAPI.
  */
 internal object CommandApi {
-
     private var loaded = false
     private var enabled = false
 

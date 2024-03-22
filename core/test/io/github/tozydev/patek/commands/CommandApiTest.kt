@@ -13,7 +13,6 @@ import io.mockk.verify
 import kotlin.test.Test
 
 class CommandApiTest {
-
     private val commandApi = spyk(CommandApi)
 
     @Test
@@ -58,7 +57,8 @@ class CommandApiTest {
         unmockkStatic(CommandAPI::onEnable)
     }
 
-    private fun mockkPlugin() = mockkPlugin {
-        every { slF4JLogger } returns mockk()
-    }
+    private fun mockkPlugin() =
+        mockkPlugin {
+            every { slF4JLogger } returns mockk()
+        }
 }
