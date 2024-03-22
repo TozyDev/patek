@@ -34,7 +34,7 @@ tasks {
 publishing {
     publications.create<MavenPublication>("maven") {
         withDefaults()
-        from(components["java"])
+        shadow.component(this)
         pom {
             name = "Patek NBT"
             description = "A library for reading and writing NBT data. (Shaded from NBTAPI by tr7zw)"
