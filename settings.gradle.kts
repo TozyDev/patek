@@ -3,6 +3,7 @@ import io.github.tozydev.fastmodule.dsl.module
 import io.github.tozydev.fastmodule.modules.ModuleType
 
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
         maven("https://maven.nguyenthanhtan.id.vn/releases")
