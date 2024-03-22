@@ -28,4 +28,12 @@ fastModule {
     module(ModuleType.PAPER_PLUGIN, "plugin") {
         moduleName = "${rootProject.name}-plugin"
     }
+    module(ModuleType.KOTLIN_JVM, "vendor/nbt") {
+        moduleName = "${rootProject.name}-vendor-nbt"
+        settings {
+            kotlin {
+                bom = false
+            }
+        }
+    }
 }
