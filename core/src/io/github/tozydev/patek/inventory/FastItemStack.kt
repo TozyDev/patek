@@ -1,6 +1,5 @@
 package io.github.tozydev.patek.inventory
 
-import io.github.tozydev.patek.nbt.NBTContainer
 import io.github.tozydev.patek.utils.BukkitColor
 import org.bukkit.Material
 import org.bukkit.block.banner.Pattern
@@ -20,7 +19,7 @@ import org.bukkit.inventory.meta.trim.ArmorTrim
  * @property flags The flags applied to the ItemStack.
  * @property isUnbreakable Indicates if the ItemStack is unbreakable.
  * @property isGlowing Indicates if the ItemStack is glowing.
- * @property nbt The NBT compound of the ItemStack.
+ * @property nbt The map of nbt tag and it values.
  * @property damage The damage value of the ItemStack.
  * @property skullTexture The skull texture of the ItemStack.
  * @property leatherArmorColor The leather armor color of the ItemStack.
@@ -41,7 +40,7 @@ data class FastItemStack(
     val flags: Set<ItemFlag> = emptySet(),
     val isUnbreakable: Boolean? = null,
     val isGlowing: Boolean? = null,
-    val nbt: NBTContainer? = null,
+    val nbt: Map<String, Any> = emptyMap(),
     val damage: Int? = null,
     val skullTexture: String? = null,
     val leatherArmorColor: BukkitColor? = null,
