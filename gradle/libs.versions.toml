@@ -8,17 +8,21 @@ commandapi-bom = "9.3.0"
 paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper" }
 kotlinx-coroutines-bom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "coroutines-bom" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
-kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
 mccoroutine-bukkit-api = { module = "com.github.shynixn.mccoroutine:mccoroutine-bukkit-api", version.ref = "mccoroutine-bom" }
 mccoroutine-bukkit-core = { module = "com.github.shynixn.mccoroutine:mccoroutine-bukkit-core", version.ref = "mccoroutine-bom" }
 commandapi-bukkit-shade = { module = "dev.jorel:commandapi-bukkit-shade", version.ref = "commandapi-bom" }
 commandapi-bukkit-kotlin = { module = "dev.jorel:commandapi-bukkit-kotlin", version.ref = "commandapi-bom" }
+item-nbt-api = { module = "de.tr7zw:item-nbt-api", version = "2.12.2" }
 
 # Testing
 mockk = { module = "io.mockk:mockk", version = "1.13.10" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
 
 # Build logic
 ktlint-gradle = { module = "org.jlleitschuh.gradle:ktlint-gradle", version = "12.1.0" }
 
 [bundles]
 commandapi-bukkit = ["commandapi-bukkit-shade", "commandapi-bukkit-kotlin"]
+
+[plugins]
+shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
