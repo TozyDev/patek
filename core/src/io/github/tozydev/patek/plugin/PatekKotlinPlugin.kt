@@ -2,6 +2,7 @@ package io.github.tozydev.patek.plugin
 
 import com.github.shynixn.mccoroutine.bukkit.MCCoroutine
 import io.github.tozydev.patek.commands.CommandApi
+import io.github.tozydev.patek.nbt.NbtApi
 import kotlinx.coroutines.runBlocking
 import org.bukkit.plugin.java.JavaPlugin
 import java.nio.file.Path
@@ -21,6 +22,7 @@ abstract class PatekKotlinPlugin : JavaPlugin(), PatekPlugin {
 
     final override fun onLoad() {
         runBlocking {
+            NbtApi.init(logger)
             CommandApi.load(this@PatekKotlinPlugin)
             onLoadAsync()
         }
