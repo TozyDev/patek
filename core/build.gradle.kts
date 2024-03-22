@@ -32,7 +32,9 @@ testing {
 }
 
 publishing {
-    publications.createPublication(components["java"]).configure {
+    publications.create<MavenPublication>("maven") {
+        withDefaults()
+        from(components["java"])
         pom {
             name = "Patek Core"
         }

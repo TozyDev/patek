@@ -1,5 +1,6 @@
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.RepositoryHandler
+import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.kotlin.dsl.maven
 
 const val TOZYDEV_REPO = "tozydev"
@@ -7,7 +8,7 @@ const val TOZYDEV_RELEASES_REPO = "https://maven.nguyenthanhtan.id.vn/releases"
 const val TOZYDEV_SNAPSHOT_REPO = "https://maven.nguyenthanhtan.id.vn/snapshots"
 private const val SNAPSHOT_SUFFIX = "-SNAPSHOT"
 
-fun RepositoryHandler.tozydev(project: Project) =
+fun RepositoryHandler.tozydev(project: Project): MavenArtifactRepository =
     maven {
         name = TOZYDEV_REPO
         url =
