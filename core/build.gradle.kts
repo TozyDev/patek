@@ -13,6 +13,7 @@ dependencies {
         exclude(module = "kotlin-stdlib-jdk8")
     }
     api(libs.bundles.commandapi.bukkit)
+    api(projects.patekVendorNbt.apply { targetConfiguration = "shadow" })
 
     implementation(libs.mccoroutine.bukkit.core) {
         exclude(module = "kotlin-stdlib-jdk8")
@@ -35,6 +36,7 @@ publishing {
     publications.create<MavenPublication>("maven") {
         withDefaults()
         from(components["java"])
+        artifact(tasks.jar.map { it.outputs.files.singleFile })
         pom {
             name = "Patek Core"
         }
