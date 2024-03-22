@@ -22,7 +22,6 @@ tasks {
     }
 
     shadowJar {
-        archiveClassifier = ""
         configurations = listOf(itemNbtApi)
         relocate("de.tr7zw.changeme.nbtapi", "io.github.tozydev.patek.nbt")
     }
