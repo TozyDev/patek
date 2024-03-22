@@ -36,7 +36,7 @@ class FastItemStackConverter(private val fastStack: FastItemStack) {
      */
     fun asBukkit(tagResolvers: Array<out TagResolver>): ItemStack {
         val itemStack = ItemStack(prepareMaterial(), prepareAmount())
-        itemStack.modifyMeta {
+        itemStack.modifyMeta<ItemMeta> {
             displayName(prepareDisplayNameComponent(tagResolvers))
             lore(prepareLoreComponents(tagResolvers))
             determineProp(FastItemStack::customModelData)?.let { setCustomModelData(it) }

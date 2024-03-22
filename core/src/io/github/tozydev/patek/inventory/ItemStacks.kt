@@ -23,13 +23,6 @@ inline fun <reified M : ItemMeta> ItemStack.itemMetaOrNull() = itemMeta as? M
 inline fun <reified M : ItemMeta> ItemStack.itemMeta() = itemMeta as M
 
 /**
- * Modifies the metadata of the given [ItemStack] using the specified [modify] function.
- *
- * @return `true` if the metadata was successfully modified, `false` otherwise.
- */
-inline fun ItemStack.modifyMeta(modify: ItemMeta.() -> Unit) = modifyMeta<ItemMeta>(modify)
-
-/**
  * Modifies the metadata of the given `ItemStack` using the specified [modify] function.
  *
  * @return `true` if the metadata was successfully modified, `false` otherwise.
