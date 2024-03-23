@@ -10,7 +10,10 @@ import java.util.*
  * @throws IllegalArgumentException if the value is of unsupported NBT type
  * @see ReadWriteNBT
  */
-operator fun ReadWriteNBT.set(key: String, value: Any?) = when (value) {
+operator fun ReadWriteNBT.set(
+    key: String,
+    value: Any?,
+) = when (value) {
     is String -> setString(key, value)
     is Int -> setInteger(key, value)
     is Double -> setDouble(key, value)

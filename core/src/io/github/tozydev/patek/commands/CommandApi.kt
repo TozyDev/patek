@@ -24,9 +24,10 @@ internal object CommandApi {
         }
         loaded = true
         CommandAPI.setLogger(CommandAPILogger.fromSlf4jLogger(plugin.slF4JLogger))
-        val config = CommandAPIBukkitConfig(plugin)
-            .shouldHookPaperReload(true)
-            .initializeNBTAPI(NBTContainer::class.java, ::NBTContainer)
+        val config =
+            CommandAPIBukkitConfig(plugin)
+                .shouldHookPaperReload(true)
+                .initializeNBTAPI(NBTContainer::class.java, ::NBTContainer)
         CommandAPI.onLoad(config)
     }
 
