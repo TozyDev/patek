@@ -28,7 +28,7 @@ fun playerOrNull(name: String) = PaperServer.getPlayerExact(name)
  * @throws IllegalArgumentException if the player is not found.
  * @see org.bukkit.Server.getPlayerExact
  */
-fun player(name: String) = requireNotNull(playerOrNull(name)) { "Player not with name `$name` not found" }
+fun player(name: String) = requireNotNull(playerOrNull(name)) { "Player with name `$name` not found" }
 
 /**
  * Finds the player with the given [id].
@@ -43,4 +43,4 @@ fun playerOrNull(id: UUID) = PaperServer.getPlayer(id)
  * @throws IllegalArgumentException if the player is not found.
  * @see org.bukkit.Server.getPlayer
  */
-fun player(id: UUID) = requireNotNull(playerOrNull(id)) { "Player with id $id not found" }
+fun player(id: UUID) = requireNotNull(playerOrNull(id)) { "Player with ID $id not found" }
