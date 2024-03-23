@@ -139,8 +139,7 @@ class FastItemStackConverter(private val fastStack: FastItemStack) {
         determineProp(getter)?.let(setter)
     }
 
-    private fun <T> determineProp(getter: (FastItemStack) -> T?): T? =
-        fastStack.merge?.let(getter) ?: fastStack.let(getter)
+    private fun <T> determineProp(getter: (FastItemStack) -> T?): T? = fastStack.merge?.let(getter) ?: fastStack.let(getter)
 
     private inline fun <reified M : ItemMeta> ItemMeta.applyIfIsInstance(block: M.() -> Unit) {
         if (this is M) {
