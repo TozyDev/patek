@@ -1,8 +1,8 @@
 package io.github.tozydev.patek.inventory
 
+import io.github.tozydev.patek.utils.BannerPattern
 import io.github.tozydev.patek.utils.BukkitColor
 import org.bukkit.Material
-import org.bukkit.block.banner.Pattern
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.meta.trim.ArmorTrim
@@ -44,7 +44,7 @@ data class FastItemStack(
     val damage: Int? = null,
     val skullTexture: String? = null,
     val leatherArmorColor: BukkitColor? = null,
-    val bannerPatterns: List<Pattern> = emptyList(),
+    val bannerPatterns: List<BannerPattern> = emptyList(),
     val armorTrim: ArmorTrim? = null,
     val potionColor: BukkitColor? = null,
     val merge: FastItemStack? = null,
