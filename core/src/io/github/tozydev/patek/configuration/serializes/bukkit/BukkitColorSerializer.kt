@@ -49,7 +49,7 @@ internal object BukkitColorSerializer : TypeSerializer<BukkitColor> {
         node: ConfigurationNode,
     ) {
         if (obj == null) {
-            node.set(null)
+            node.raw(null)
             return
         }
 
