@@ -1,8 +1,5 @@
 package io.github.tozydev.patek.configuration.serializes.bukkit
 
-import io.github.tozydev.patek.configuration.serializes.KeySerializer
-import io.github.tozydev.patek.key.asBukkit
-import org.bukkit.Registry
 import org.bukkit.inventory.meta.trim.ArmorTrim
 import org.bukkit.inventory.meta.trim.TrimMaterial
 import org.bukkit.inventory.meta.trim.TrimPattern
@@ -22,21 +19,9 @@ internal object ArmorTrimSerializer : TypeSerializer<ArmorTrim> {
         if (!node.isMap) {
             throw SerializationException("Invalid armor trim format")
         }
-        val material = deserializeTrimMaterial(node.node(MATERIAL).rawScalar())
-        val pattern = deserializeTrimPattern(node.node(PATTERN).rawScalar())
+        val material = BukkitRegistrySerializers.deserialize<TrimMaterial>(node.node(MATERIAL))
+        val pattern = BukkitRegistrySerializers.deserialize<TrimPattern>(node.node(PATTERN))
         return ArmorTrim(material, pattern)
-    }
-
-    private fun deserializeTrimMaterial(input: Any?): TrimMaterial {
-        val key = KeySerializer.deserialize(input)
-        return Registry.TRIM_MATERIAL[KeySerializer.deserialize(input).asBukkit()]
-            ?: throw SerializationException("Unknown trim material: $key")
-    }
-
-    private fun deserializeTrimPattern(input: Any?): TrimPattern {
-        val key = KeySerializer.deserialize(input)
-        return Registry.TRIM_PATTERN[KeySerializer.deserialize(input).asBukkit()]
-            ?: throw SerializationException("Unknown trim pattern: $key")
     }
 
     override fun serialize(
