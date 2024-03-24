@@ -17,23 +17,23 @@ import kotlin.reflect.KClass
  * @param registry the registry to get the item from
  */
 class RegistryItemSerializer<T : Keyed>
-@PublishedApi
-internal constructor(
-    private val kClass: KClass<T>,
-    private val registry: Registry<T>,
-) : ScalarSerializer<T>(kClass.java) {
-    override fun deserialize(
-        type: Type,
-        obj: Any,
-    ): T =
-        KeySerializer.tryDeserialize(obj)?.asBukkit()?.let { registry.get(it) }
-            ?: throw SerializationException("Unknown ${kClass.simpleName}: $obj")
+    @PublishedApi
+    internal constructor(
+        private val kClass: KClass<T>,
+        private val registry: Registry<T>,
+    ) : ScalarSerializer<T>(kClass.java) {
+        override fun deserialize(
+            type: Type,
+            obj: Any,
+        ): T =
+            KeySerializer.tryDeserialize(obj)?.asBukkit()?.let { registry.get(it) }
+                ?: throw SerializationException("Unknown ${kClass.simpleName}: $obj")
 
-    override fun serialize(
-        item: T,
-        typeSupported: Predicate<Class<*>>?,
-    ): Any = item.key().asMinimalString()
-}
+        override fun serialize(
+            item: T,
+            typeSupported: Predicate<Class<*>>?,
+        ): Any = KeySerializer.serialize(item)
+    }
 
 /**
  * Creates a scalar serializer for the given [registry] item.
@@ -42,5 +42,4 @@ internal constructor(
  * @param registry the registry to get the item from
  */
 @Suppress("FunctionName", "RedundantSuppression")
-inline fun <reified T : Keyed> RegistryItemSerializer(registry: Registry<T>) =
-    RegistryItemSerializer(T::class, registry)
+inline fun <reified T : Keyed> RegistryItemSerializer(registry: Registry<T>) = RegistryItemSerializer(T::class, registry)

@@ -1,5 +1,6 @@
 package io.github.tozydev.patek.configuration.serializes.bukkit
 
+import io.github.tozydev.patek.configuration.serializes.KeySerializer
 import org.bukkit.inventory.meta.trim.ArmorTrim
 import org.bukkit.inventory.meta.trim.TrimMaterial
 import org.bukkit.inventory.meta.trim.TrimPattern
@@ -34,7 +35,7 @@ internal object ArmorTrimSerializer : TypeSerializer<ArmorTrim> {
             return
         }
 
-        node.node(MATERIAL).raw(obj.material.key().asMinimalString())
-        node.node(PATTERN).raw(obj.pattern.key().asMinimalString())
+        node.node(MATERIAL).raw(KeySerializer.serialize(obj.material))
+        node.node(PATTERN).raw(KeySerializer.serialize(obj.pattern))
     }
 }

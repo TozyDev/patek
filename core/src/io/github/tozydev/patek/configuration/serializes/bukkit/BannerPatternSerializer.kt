@@ -44,7 +44,7 @@ object BannerPatternSerializer : TypeSerializer<BannerPattern> {
             return
         }
 
-        node.node(PATTERN).raw(obj.pattern.key().asMinimalString())
+        node.node(PATTERN).raw(KeySerializer.serialize(obj.pattern))
         node.node(COLOR).raw(obj.color)
     }
 }
