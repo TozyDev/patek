@@ -10,7 +10,6 @@ import kotlin.reflect.KClass
 import kotlin.test.BeforeTest
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNull
 
 abstract class SerializerTestBase<T : Any>(val type: TypeToken<T>, private val serializer: TypeSerializer<T>) {
     constructor(serializer: ScalarSerializer<T>) : this(serializer.type(), serializer)
@@ -31,9 +30,5 @@ abstract class SerializerTestBase<T : Any>(val type: TypeToken<T>, private val s
         assertFailsWith<T>(message) {
             node.get(type)
         }
-    }
-
-    protected fun assertNullDeserialization() {
-        assertNull(node.get(type))
     }
 }
