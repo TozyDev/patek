@@ -1,11 +1,13 @@
 package io.github.tozydev.patek.inventory
 
+import io.github.tozydev.patek.configuration.mapping.resolvers.Multiline
 import io.github.tozydev.patek.utils.BannerPattern
 import io.github.tozydev.patek.utils.BukkitColor
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.meta.trim.ArmorTrim
+import org.spongepowered.configurate.objectmapping.ConfigSerializable
 
 /**
  * The FastItemStack class represents a fast and efficient way to create and manipulate ItemStack objects in Bukkit.
@@ -30,10 +32,12 @@ import org.bukkit.inventory.meta.trim.ArmorTrim
  *
  * @constructor Creates a new FastItemStack instance.
  */
+@ConfigSerializable
 data class FastItemStack(
     val material: Material = Material.AIR,
     val amount: Int? = null,
     val displayName: String? = null,
+    @Multiline
     val lore: String? = null,
     val customModelData: Int? = null,
     val enchants: Map<Enchantment, Int> = emptyMap(),
