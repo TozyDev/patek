@@ -13,6 +13,7 @@ dependencies {
         exclude(module = "kotlin-stdlib-jdk8")
     }
     api(libs.bundles.commandapi.bukkit)
+    api(libs.configurate.extra.kotlin)
     api(projects.patekVendorNbt.apply { targetConfiguration = "shadow" })
 
     implementation(libs.mccoroutine.bukkit.core) {
