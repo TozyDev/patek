@@ -8,7 +8,7 @@ import org.spongepowered.configurate.serialize.SerializationException
 import java.lang.reflect.Type
 import java.util.function.Predicate
 
-object KeySerializer : ScalarSerializer<Key>(Key::class.java) {
+internal object KeySerializer : ScalarSerializer<Key>(Key::class.java) {
     override fun deserialize(
         type: Type,
         obj: Any,
